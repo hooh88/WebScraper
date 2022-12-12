@@ -1,0 +1,58 @@
+import { RouteInfo } from "./sidebar.metadata";
+
+export const ROUTES: RouteInfo[] = [
+  {
+    path: "/web-scraper/ex-sites",
+    params: { number: 1, size: 10 },
+    title: "تنظیمات - وبسایت",
+    icon: "bi bi-list",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+  {
+    path: "/web-scraper/ex-cats",
+    params: { number: 1, size: 10 },
+    title: "تنظیمات - دسته بندی",
+    icon: "bi bi-list",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+  {
+    path: "/web-scraper/ex-product",
+    params: { number: 1, size: 10 },
+    title: "تنظیمات - محصول",
+    icon: "bi bi-list",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+  {
+    path: "/web-scraper/data/products",
+    params: { number: 1, size: 10 },
+    title: "محصولات",
+    icon: "bi bi-list",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+  {
+    path: "/web-scraper/data/product-details",
+    params: { number: 1, size: 10 },
+    title: "اطلاعات محصول",
+    icon: "bi bi-list",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+  {
+    path: "/export",
+    params: {  },
+    title: "خروجی اطلاعات",
+    icon: "bi bi-list",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+];

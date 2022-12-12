@@ -1,0 +1,47 @@
+<div class="modal-header" >
+  <h4 class="modal-title">
+    <ng-container *ngIf="isNew;else elseTmp">سایت جدید</ng-container>
+    <ng-template #elseTmp>بروز رسانی</ng-template>
+  </h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <div class="container">
+      <form>
+        <div class="mb-3 row">
+          <label for="siteName" class="col-xs-4 col-form-label">نام سایت</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control" [(ngModel)]="model.name" name="name" id="siteName" placeholder="نام سایت">
+          </div>
+          <label for="url" class="col-xs-4 col-form-label">آدرس سایت</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.url" name="url" id="url" placeholder="https://hooh.ir">
+          </div>
+
+          <fieldset class="mb-3 row">
+            <legend class="col-form-legend col-xs-4">نوع سایت </legend>
+            <div class="col-xs-8">
+              <label class="custom-control custom-radio">
+                <input type="radio" name="siteType" id="siteType2" [(ngModel)]="model.type" [value]="2" class="custom-control-input" selected>
+                <span class="custom-control-indicator"> XPath </span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input type="radio" name="siteType" id="siteType1" [(ngModel)]="model.type" [value]="1" class="custom-control-input">
+                <span class="custom-control-indicator"> JSON </span>
+              </label>
+            </div>
+          </fieldset>
+
+
+        </div>
+      </form>
+
+    </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()">انصراف</button>
+  <button type="button" class="btn btn-primary" (click)="submit()">
+    <ng-container *ngIf="isNew;else elseTmp">ذخیره</ng-container>
+    <ng-template #elseTmp>بروز رسانی</ng-template>
+  </button>
+</div>

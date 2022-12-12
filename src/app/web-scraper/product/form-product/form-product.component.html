@@ -1,0 +1,139 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <ng-container *ngIf="isNew; else elseTmp">اطلاعات محصول جدید</ng-container>
+    <ng-template #elseTmp>بروز رسانی</ng-template>
+  </h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <form>
+      <div class="mb-3 row">
+        <label for="propName" class="col-xs-4 col-form-label"
+          >نام اطلاعات محصول</label
+        >
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="model.propName"
+            name="name"
+            id="propName"
+            placeholder="نام"
+          />
+        </div>
+
+        <label for="exCategoryId" class="col-xs-4 col-form-label"
+          >انتخاب دسته</label
+        >
+        <div class="col-xs-8">
+          <select
+            [(ngModel)]="model.exCategoryId"
+            name="exCategoryId"
+            id="exCategoryId"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected disabled>لطفا یک دسته انتخاب کنید.</option>
+            <option [value]="item.id" *ngFor="let item of parents">
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
+
+        <label for="xPath" class="col-xs-4 col-form-label"
+          >آدرس در DOC یا در JSON</label
+        >
+        <div class="col-xs-8">
+          <input
+            type="text"
+            class="form-control text-left"
+            dir="ltr"
+            [(ngModel)]="model.xPath"
+            name="xPath"
+            id="xPath"
+          />
+        </div>
+
+        <label for="xPathRepeat" class="col-xs-4 col-form-label"
+          >نوع اطلاعات</label
+        >
+        <div class="col-xs-8">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DetailType"
+              id="Default"
+              [(ngModel)]="model.type"
+              [value]="1"
+            />
+            <label class="form-check-label" for="Default"> متن </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DetailType"
+              id="img"
+              [(ngModel)]="model.type"
+              [value]="2"
+            />
+            <label class="form-check-label" for="img"> تصویر </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DetailType"
+              id="gallery"
+              [(ngModel)]="model.type"
+              [value]="3"
+            />
+            <label class="form-check-label" for="gallery"> گالری </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="DetailType"
+              id="loop"
+              [(ngModel)]="model.type"
+              [value]="4"
+            />
+            <label class="form-check-label" for="loop"> حلقه </label>
+          </div>
+
+          <ng-container *ngIf="model.type == 4">
+            <label for="propValue" class="col-xs-4 col-form-label">مقدار</label>
+            <div class="col-xs-8">
+              <input
+                type="text"
+                class="form-control text-left"
+                dir="ltr"
+                [(ngModel)]="model.propValue"
+                name="propValue"
+                id="propValue"
+              />
+              <small>درصورت انتخاب حلقه باید مقدار این بخش را مشخص کنید.</small>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()">
+    انصراف
+  </button>
+  <button type="button" class="btn btn-primary" (click)="submit()">
+    <ng-container *ngIf="isNew; else elseTmp">ذخیره</ng-container>
+    <ng-template #elseTmp>بروز رسانی</ng-template>
+  </button>
+</div>

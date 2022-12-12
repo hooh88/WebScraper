@@ -1,0 +1,117 @@
+<div class="card-body">
+  <div class="row">
+    <div class="col-12">
+      <div class="card p-3">
+        <form *ngIf="isSelectFile">
+          <div class="mb-3 row col-4 mx-auto">
+            <label for="file" class="col-xs-4 col-form-label"
+              >انتخاب فایل</label
+            >
+            <div class="col-xs-8">
+              <input class="form-control" type="file" id="file" #fileSelector />
+            </div>
+
+            <label for="exCategoryId" class="col-xs-4 col-form-label"
+              >انتخاب دسته</label
+            >
+            <div class="col-xs-8">
+              <select
+                [(ngModel)]="catId"
+                name="catId"
+                id="catId"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option [value]="item.id" *ngFor="let item of cats">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col-xs-8 mt-4">
+              <div class="d-grid gap-2">
+                <button
+                  (click)="postCSVFile()"
+                  type="button"
+                  name=""
+                  id=""
+                  class="btn btn-primary"
+                >
+                  آپلود و دریافت اطلاعات
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <form *ngIf="!isSelectFile">
+          <div class="mb-3 row">
+            <ng-container *ngFor="let col of colHeads; let i = index">
+              <div class="col-6">
+                <label for="exCategoryId" class="col-form-label"
+                  >عنوان جدول</label
+                >
+                <div class="col-xs-4">
+                  <input
+                    [(ngModel)]="col.title"
+                    class="form-control"
+                    type="text"
+                    [ngModelOptions]="{standalone: true}"
+                    disabled
+                  />
+                  <!-- <select
+
+                    name="catId"
+                    id="catId"
+                    [value]="i+1"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option [value]="item.id" *ngFor="let item of colHeads">
+                      {{ item.title }}
+                    </option>
+                  </select> -->
+                </div>
+              </div>
+
+              <div class="col-6">
+                <label for="file" class="col-form-label">انتخاب مقدار</label>
+                <select
+                  [(ngModel)]="col.value"
+                  [ngModelOptions]="{standalone: true}"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option
+                    [value]="item.id"
+                    *ngFor="let item of model.exProducts"
+                  >
+                    {{ item.propName }}
+                  </option>
+                </select>
+
+                <input class="form-control"
+                [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="col.value" />
+              </div>
+            </ng-container>
+
+            <div class="col-xs-8 mt-4">
+              <div class="d-grid gap-2">
+                <button
+                  (click)="postOptions()"
+                  type="button"
+                  name=""
+                  id=""
+                  class="btn btn-primary"
+                >
+                  ارسال اطلاعات
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<swal #toastSwal [swalOptions]="toastOptions"> </swal>

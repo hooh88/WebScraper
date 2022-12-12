@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800');
+// @import 'sweetalert2/src/sweetalert2.scss'
+.swal2-popup.swal2-toast{
+  display: flex !important;
+  align-items: center !important;
+}

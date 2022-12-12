@@ -1,0 +1,127 @@
+<div class="card-body">
+  <div class="pb-3 d-flex flex-row justify-content-between align-items-center">
+    <h4 class="card-title mb-0">{{ Title }}</h4>
+    <div *ngIf="ShowActions" class="button-group">
+      <button
+        (click)="action(null, actionsType.new)"
+        type="button"
+        class="btn btn-outline-success"
+      >
+        <i class="bi bi-plus-circle"></i> {{ Title }} جدید
+      </button>
+    </div>
+  </div>
+  <p *ngIf="Model.length <= 0">
+    <ngb-alert
+      type="warning"
+      [dismissible]="false"
+      class="customize-alert fs-5"
+    >
+      اطلاعاتی جهت نمایش وجود ندارد!
+    </ngb-alert>
+  </p>
+  <div class="table-responsive" *ngIf="Model.length > 0">
+    <table
+      class="table table-hover align-middle text-nowrap table-bordered table-striped"
+    >
+      <thead>
+        <tr>
+          <th class="text-dark font-medium fs-4">#</th>
+          <th *ngIf="ShowActions" class="text-dark font-medium fs-4">عملیات</th>
+          <th class="text-dark font-medium fs-4" *ngFor="let prop of Grids">
+            {{ prop.title }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of Model; let i = index">
+          <td>
+            {{ i + 1 }}
+          </td>
+          <td *ngIf="ShowActions">
+            <div class="button-group">
+              <button *ngFor="let action of TblActions"
+                (click)="callAction(item, action.ActionType)"
+                type="button"
+                class="btn btn-outline-{{action.Class}} btn-sm"
+              >
+                <i class="bi bi-{{action.Icon}}"></i>
+              </button>
+              <!-- <button
+                (click)="action(item, actionsType.update)"
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button
+                (click)="askDelete(item)"
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+              >
+                <i class="bi bi-trash"></i>
+              </button> -->
+            </div>
+          </td>
+          <ng-container *ngFor="let prop of Grids">
+            <ng-container [ngSwitch]="prop.dir">
+              <td *ngSwitchCase="colDir.ltr" class="text-left" dir="ltr">
+                <span [ngSwitch]="prop.type">
+                  <span *ngSwitchCase="colType.string">{{
+                    item[prop.propName]
+                  }}</span>
+                  <span *ngSwitchCase="colType.number">{{
+                    item[prop.propName]
+                  }}</span>
+                  <span class="text-left" dir="ltr" *ngSwitchCase="colType.url"
+                    ><a target="_blank" [href]="item.url">
+                      باز کردن لینک
+                    </a></span
+                  >
+                  <ng-container *ngSwitchCase="colType.bool" >
+                   {{ item[prop.propName]}}
+                  </ng-container>
+                  <span *ngSwitchCase="colType.date">date not set</span>
+                  <span *ngSwitchCase="colType.dateTime">dateTime not set</span>
+                  <span *ngSwitchDefault>item not valid</span>
+                </span>
+              </td>
+              <td *ngSwitchCase="colDir.rtl">
+                <span [ngSwitch]="prop.type">
+                  <span *ngSwitchCase="colType.string">{{
+                    item[prop.propName]
+                  }}</span>
+                  <span *ngSwitchCase="colType.number">{{
+                    item[prop.propName]
+                  }}</span>
+                  <span class="text-left" dir="ltr" *ngSwitchCase="colType.url"
+                    ><a target="_blank" [href]="item.url">{{
+                      item.url
+                    }}</a></span
+                  >
+                  <span *ngSwitchCase="colType.date">not set</span>
+                  <span *ngSwitchCase="colType.dateTime">not set</span>
+                </span>
+              </td>
+            </ng-container>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ngb-pagination
+    *ngIf="pageOpt"
+    [(page)]="pageOpt.CurrentPage"
+    [pageSize]="pageOpt.PageSize"
+    [collectionSize]="pageOpt.TotalCount"
+    (pageChange)="changePage($event)"
+    [maxSize]="3"
+  ></ngb-pagination>
+</div>
+
+<swal
+  #deleteSwal
+  [swalOptions]="swalOptions"
+  (confirm)="action(model, actionsType.delete)"
+>
+</swal>

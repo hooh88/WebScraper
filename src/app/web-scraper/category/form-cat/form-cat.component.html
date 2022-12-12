@@ -1,0 +1,77 @@
+<div class="modal-header" >
+  <h4 class="modal-title">
+    <ng-container *ngIf="isNew;else elseTmp">دسته جدید</ng-container>
+    <ng-template #elseTmp>بروز رسانی</ng-template>
+  </h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+<div class="modal-body">
+    <div class="container">
+      <form>
+        <div class="mb-3 row">
+
+          <label for="siteName" class="col-xs-4 col-form-label">نام دسته</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control" [(ngModel)]="model.name" name="name" id="siteName" placeholder="نام دسته">
+          </div>
+
+          <label for="siteId" class="col-xs-4 col-form-label">انتخاب سایت</label>
+          <div class="col-xs-8">
+            <select [(ngModel)]="model.siteId" name="siteId" id="siteId" class="form-select" aria-label="Default select example">
+              <option selected disabled>لطفا یک سایت انتخاب کنید.</option>
+              <option [value]="site.id" *ngFor="let site of parents">{{site.name}}</option>
+            </select>
+          </div>
+
+          <label for="url" class="col-xs-4 col-form-label">آدرس دسته</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.url" name="url" id="url" placeholder="https://hooh.ir/cats/">
+          </div>
+
+          <label for="xPathRepeat" class="col-xs-4 col-form-label">تگ تکرار محصول</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.xPathRepeat" name="xPathRepeat" id="xPathRepeat" placeholder="">
+          </div>
+
+          <label for="xPathTitle" class="col-xs-4 col-form-label">تگ تایتل محصول</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.xPathTitle" name="xPathTitle" id="xPathTitle" placeholder="">
+          </div>
+
+          <label for="xPathUrl" class="col-xs-4 col-form-label">تگ ادرس محصول</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.xPathUrl" name="xPathUrl" id="xPathUrl" placeholder="">
+          </div>
+
+          <label for="xPathPaging" class="col-xs-4 col-form-label">تگ صفحه بندی محصول</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.xPathPaging" name="xPathPaging" id="xPathPaging" placeholder="">
+          </div>
+
+          <label for="pagingTemplate" class="col-xs-4 col-form-label">تمپلیت صفحه بندی JSON</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.pagingTemplate" name="pagingTemplate" id="pagingTemplate" placeholder="/?page={0}">
+          </div>
+
+          <label for="pagesCount" class="col-xs-4 col-form-label">حداکثر صفحه کاوش</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.pagesCount" name="pagesCount" id="pagesCount" placeholder="پیشفرض دی جی کالا = 100">
+          </div>
+
+          <label for="productBaseUrlTemplate" class="col-xs-4 col-form-label">تمپلیت آدرس محصول جهت واکشی JSON</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control text-left" dir="ltr"  [(ngModel)]="model.productBaseUrlTemplate" name="productBaseUrlTemplate" id="productBaseUrlTemplate">
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()">انصراف</button>
+  <button type="button" class="btn btn-primary" (click)="submit()">
+    <ng-container *ngIf="isNew;else elseTmp">ذخیره</ng-container>
+    <ng-template #elseTmp>بروز رسانی</ng-template>
+  </button>
+</div>

@@ -1,0 +1,7 @@
+<div class="card-body" >
+  <app-table (Actions)="TableActions($event)" Title="وبسایت" [Grids]="grids" [Model]="models" [TblActions]="actions"></app-table>
+</div>
+<swal
+  #toastSwal
+  [swalOptions]="toastOptions">
+</swal>
